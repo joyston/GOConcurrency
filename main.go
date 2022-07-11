@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func swap(x int, c chan int) {
 	c <- x * 2
@@ -28,7 +31,16 @@ func selectFibonacci(c, quit chan int) {
 	}
 }
 
+func worker(done chan bool) {
+	fmt.Println("......Started work")
+	time.Sleep(time.Second)
+	fmt.Println("work complete....")
+	done <- true
+}
+
 func main() {
+	cBool := make(chan bool)
+	go worker(cBool)
 	c := make(chan int)
 	go swap(2, c)
 	go swap(3, c)
@@ -36,7 +48,7 @@ func main() {
 	x := <-c
 	fmt.Println(y, x)
 
-	ch := make(chan int, 10)
+	ch := make(chan int, 5)
 	go fibonacci(cap(ch), ch)
 
 	for i := range ch {
@@ -53,4 +65,6 @@ func main() {
 		cQuit <- 0
 	}()
 	selectFibonacci(cValues, cQuit)
+
+	<-cBool
 }
