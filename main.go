@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func swap(x int, c chan int) {
+func multiplAndSendOnChan(x int, c chan int) {
 	c <- x * 2
 }
 
@@ -25,7 +25,7 @@ func selectFibonacci(c, quit chan int) {
 		case c <- a:
 			a, b = b, a+b
 		case <-quit:
-			fmt.Println("Quit")
+			fmt.Println("Quit Fibonacci using Select")
 			return
 		}
 	}
@@ -50,12 +50,14 @@ func pong(cRec <-chan string, cSending chan<- string) {
 func main() {
 	cBool := make(chan bool)
 	go worker(cBool)
+	<-cBool //waiting to receive
+
 	c := make(chan int)
-	go swap(2, c)
-	go swap(3, c)
+	go multiplAndSendOnChan(2, c)
+	go multiplAndSendOnChan(3, c)
 	y := <-c
 	x := <-c
-	fmt.Println(y, x)
+	fmt.Println("Multiplied values", y, x)
 
 	ch := make(chan int, 5)
 	go fibonacci(cap(ch), ch)
@@ -64,6 +66,7 @@ func main() {
 		fmt.Println(i)
 	}
 
+	//Waiting on multiple channel operations using select
 	cValues := make(chan int)
 	cQuit := make(chan int)
 	fmt.Println("********Fibonacci using Select*****")
@@ -75,12 +78,11 @@ func main() {
 	}()
 	selectFibonacci(cValues, cQuit)
 
-	<-cBool
-
 	//Channel Directions
 	pings := make(chan string, 1)
 	pongs := make(chan string, 1)
 	ping(pings, "Passed message")
 	pong(pings, pongs)
 	fmt.Println(<-pongs)
+
 }
