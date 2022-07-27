@@ -50,17 +50,17 @@ func pong(cRec <-chan string, cSending chan<- string) {
 func main() {
 	cBool := make(chan bool)
 	go worker(cBool)
-	<-cBool //waiting to receive
+	<-cBool //waiting to receive (Channel synchronization)
 
 	c := make(chan int)
 	go multiplAndSendOnChan(2, c)
 	go multiplAndSendOnChan(3, c)
 	y := <-c
 	x := <-c
-	fmt.Println("Multiplied values", y, x)
+	fmt.Println("Multiplied values:", y, x)
 
-	ch := make(chan int, 5)
-	go fibonacci(cap(ch), ch)
+	ch := make(chan int, 5)   //buffered channel
+	go fibonacci(cap(ch), ch) //accept a limited number of values without a corresponding receiver for those values.
 
 	for i := range ch {
 		fmt.Println(i)
@@ -85,4 +85,6 @@ func main() {
 	pong(pings, pongs)
 	fmt.Println(<-pongs)
 
+	//Non-Blocking channels
+	ExecuteNonBlocking()
 }
