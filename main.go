@@ -87,4 +87,7 @@ func main() {
 
 	//Non-Blocking channels
 	ExecuteNonBlocking()
+
+	//Closing Channels
+	ExecuteClosing()
 }
