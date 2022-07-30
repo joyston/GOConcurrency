@@ -38,15 +38,6 @@ func worker(done chan bool) {
 	done <- true
 }
 
-func ping(cSending chan<- string, msg string) {
-	cSending <- msg
-}
-
-func pong(cRec <-chan string, cSending chan<- string) {
-	msg := <-cRec
-	cSending <- msg
-}
-
 func main() {
 	cBool := make(chan bool)
 	go worker(cBool)
@@ -79,15 +70,14 @@ func main() {
 	selectFibonacci(cValues, cQuit)
 
 	//Channel Directions
-	pings := make(chan string, 1)
-	pongs := make(chan string, 1)
-	ping(pings, "Passed message")
-	pong(pings, pongs)
-	fmt.Println(<-pongs)
+	ExecuteDirections()
 
 	//Non-Blocking channels
 	ExecuteNonBlocking()
 
 	//Closing Channels
 	ExecuteClosing()
+
+	//Range over channels
+	ExecuteRanging()
 }
