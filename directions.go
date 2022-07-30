@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func ping(cSending chan<- string, msg string) {
 	cSending <- msg
 }
