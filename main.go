@@ -21,8 +21,11 @@ func main() {
 	ExecuteClosing()
 
 	//Range over channels
-	ExecuteRanging()	*/
+	ExecuteRanging()
 
 	//Timers
-	ExecuteTimers()
+	ExecuteTimers()*/
+
+	//Tickers
+	ExecuteTickers()
 }
