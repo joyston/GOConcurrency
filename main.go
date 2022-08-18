@@ -2,7 +2,7 @@ package main
 
 func main() {
 	//Channel synchronization
-	ExecuteSynchronize()
+	/*ExecuteSynchronize()
 
 	//Buffered Channels
 	ExecuteBufferedChannels()
@@ -21,5 +21,8 @@ func main() {
 	ExecuteClosing()
 
 	//Range over channels
-	ExecuteRanging()
+	ExecuteRanging()	*/
+
+	//Timers
+	ExecuteTimers()
 }
