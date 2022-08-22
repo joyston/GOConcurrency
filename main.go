@@ -27,5 +27,8 @@ func main() {
 	ExecuteTimers()*/
 
 	//Tickers
-	ExecuteTickers()
+	// ExecuteTickers()
+
+	//Worker pool
+	ExecWorkerPool()
 }
