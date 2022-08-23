@@ -30,5 +30,8 @@ func main() {
 	// ExecuteTickers()
 
 	//Worker pool
-	ExecWorkerPool()
+	// ExecWorkerPool()
+
+	//Waitgroups
+	ExecWaitGroups()
 }
