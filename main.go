@@ -33,5 +33,8 @@ func main() {
 	// ExecWorkerPool()
 
 	//Waitgroups
-	ExecWaitGroups()
+	// ExecWaitGroups()
+
+	//Atomic Counters
+	ExecAtomicCounters()
 }
