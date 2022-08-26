@@ -36,5 +36,8 @@ func main() {
 	// ExecWaitGroups()
 
 	//Atomic Counters
-	ExecAtomicCounters()
+	// ExecAtomicCounters()
+
+	//Mutexes
+	ExecMutex()
 }
